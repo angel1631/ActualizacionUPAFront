@@ -28,6 +28,9 @@ export default function actualizar_cliente(){
                 validations:{"regex_change": "[^0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
             {id: 'email', required: 'si', description: 'Correo electronico', type:'email'},
+            {id: 'front_dpi_file', required: 'si', description: 'Imagen frontal del DPI', type: 'file'},
+            {id: 'reverse_dpi_file', required: 'si', description: 'Imagen reverso del DPI', type: 'file'}
+
         ]
     }
     let schema_laboral = {
