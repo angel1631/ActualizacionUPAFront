@@ -94,7 +94,7 @@ export default function actualizar_cliente(){
         </GCard>
         <GCard title="Datos Financieros" className="datos_financieros" id="datos_financieros" tabindex={0}>
             <p>Que tipo de ingresos posee:</p>
-            <div className="button_container">
+            <div className="income_button_container">
                 <div className="income_button" onClick={()=>{show_laboral[1](true)}}><icon className="material-icons-outlined icon">business</icon><label>Salario</label></div>
                 <div className="income_button" onClick={()=>{show_negocio[1](true)}}><icon className="material-icons-outlined icon">store</icon><label>Negocio propio</label></div>
                 <div className="income_button" onClick={()=>{show_otros[1](true)}}><icon className="material-icons-outlined icon">paid</icon><label>Otros</label></div>

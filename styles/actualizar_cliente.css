@@ -1,25 +1,25 @@
-.button_container{
+.income_button_container{
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 80%;
     margin-left: 10%;
 }
-.button_container .income_button{
+.income_button_container .income_button{
     display: flex;
     align-items: center;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #2da639;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
-
-
+    margin-bottom: 1rem;
 }
-.button_container .income_button:hover {
-    background-color: #0056b3;
+.income_button_container .income_button:hover {
+    background-color: #258c2f;
 }
 .income_button .icon {
     margin-right: 8px;
@@ -31,7 +31,13 @@
     font-size: 16px;
 }
 .button_guardar_actualizacion{
-    background: var(--primary-color);
+    background: #20335b;
     margin-top: 3rem;
     color: white;
+}
+
+@media (min-width: 1280px)  {
+    .income_button_container{
+        flex-direction: row;
+    }
 }
