@@ -17,17 +17,17 @@ export default function actualizar_cliente(){
     let schema_personal = {
         title: 'Actualizacion de asociado',
         fields:[
-            {id: 'cif', required: 'si', description:'Numero de asociado', type:'number'},
+            {id: 'cif', required: 'si', description:'Número de asociado', type:'number'},
             {id: 'nombre', required: 'si', description: 'Nombre completo', type:'text'},
-            {id: 'dpi', required: 'si', description: 'Numero de dpi', type:'dpi'},
-            {id: 'direccion', required: 'si', description: 'Direccion de domicilio', type:'text'},
-            {id: 'celular', required: 'si', description: 'Numero de celular', type:'text', 
+            {id: 'dpi', required: 'si', description: 'Número de dpi', type:'dpi'},
+            {id: 'direccion', required: 'si', description: 'Dirección de domicilio', type:'text'},
+            {id: 'celular', required: 'si', description: 'Número de celular', type:'text', 
                 validations:{"regex_change": "[^0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
-            {id: 'telefono', required: 'no', description: 'Numero de telefono domiciliar', type:'text',
+            {id: 'telefono', required: 'no', description: 'Número de teléfono domiciliar', type:'text',
                 validations:{"regex_change": "[^0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
-            {id: 'email', required: 'si', description: 'Correo electronico', type:'email'},
+            {id: 'email', required: 'si', description: 'Correo electrónico', type:'email'},
             {id: 'front_dpi_file', required: 'si', description: 'Imagen frontal del DPI', type: 'file'},
             {id: 'reverse_dpi_file', required: 'si', description: 'Imagen reverso del DPI', type: 'file'}
 
@@ -38,8 +38,8 @@ export default function actualizar_cliente(){
         fields: [
             {id: 'empresa', required: 'si', description: 'Nombre de la empresa donde labora', type:'text'},
             {id: 'puesto', required: 'si', description: 'Puesto que ocupa en la empresa', type:'text'},
-            {id: 'direccion_empresa', required: 'si', description: 'Direccion de la empresa', type: 'text'},
-            {id: 'telefono_empresa', required: 'si',  description: 'Telefono de la empresa', type: 'text',
+            {id: 'direccion_empresa', required: 'si', description: 'Dirección de la empresa', type: 'text'},
+            {id: 'telefono_empresa', required: 'si',  description: 'Teléfono de la empresa', type: 'text',
                 validations:{"regex_change": "^[0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
             {id: 'ingreso_empresa', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
@@ -49,9 +49,9 @@ export default function actualizar_cliente(){
         title: 'Ingreso Negocio', 
         fields: [
             {id: 'negocio', required: 'si', description: 'Nombre del negocio', type:'text'},
-            {id: 'objeto', required: 'si', description: 'A que se dedica el negocio', type:'text'},
-            {id: 'direccion_negocio', required: 'si', description: 'Direccion del negocio', type: 'text'},
-            {id: 'telefono_negocio', required: 'si',  description: 'Telefono del negocio', type: 'text', 
+            {id: 'objeto', required: 'si', description: 'Objeto del negocio', type:'text'},
+            {id: 'direccion_negocio', required: 'si', description: 'Dirección del negocio', type: 'text'},
+            {id: 'telefono_negocio', required: 'si',  description: 'Teléfono del negocio', type: 'text', 
                 validations:{"regex_change": "^[0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
             {id: 'ingreso_negocio', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
