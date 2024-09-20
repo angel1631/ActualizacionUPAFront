@@ -115,7 +115,7 @@ export default function actualizar_cliente(){
             if(!values_personal[0]) throw `Se debe de llenar el formulario con los datos personales`
             if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
             let data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
-            await communication({url:"/api/GnesisWorflow/Services/create_folder_customer", data});
+            await communication({url:"/api/GnesisWorkflow/Services/create_folder_customer", data});
             successAlert("Todo Ok");
         }catch(err){
             errorAlert(err);
