@@ -112,6 +112,7 @@ export default function actualizar_cliente(){
     }
     let guardar_actualizacion = ()=>{
         try{
+            if(!values_personal) throw `Se debe de llenar el formulario con los datos personales`
             if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
             data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
             communication({url:"/api/ActualizacionUPA/Services/create_folder_customer",data});
@@ -139,7 +140,7 @@ export default function actualizar_cliente(){
                     <div id="ingreso_laboral">
                         <h2>Ingreso por Salario</h2>
                         <div className="laboral_data">
-                            <GList data={values_laboral[0]} fields_display={['name','position', 'address', 'phone', 'amount']}/>
+                            <GList data={[values_laboral[0]]} fields_display={['name','position', 'address', 'phone', 'amount']}/>
                         </div> 
                     </div>
                 }
@@ -148,7 +149,7 @@ export default function actualizar_cliente(){
                     <div id="ingreso_negocio">
                         <h2>Ingresos por negocios</h2>
                         <div className="laboral_data">
-                            <GList data={values_laboral[0]} fields_display={['name','object', 'address', 'phone', 'amount']}/>
+                            <GList data={[values_laboral[0]]} fields_display={['name','object', 'address', 'phone', 'amount']}/>
                         </div> 
                     </div>
                 }
@@ -157,7 +158,7 @@ export default function actualizar_cliente(){
                     <div id="ingreso_otro">
                         <h2>Otros Ingresos</h2>
                         <div className="laboral_data">
-                            <GList data={values_laboral[0]} fields_display={['remesa','jubilacion', 'renta', 'servicios']}/>
+                            <GList data={[values_laboral[0]]} fields_display={['remesa','jubilacion', 'renta', 'servicios']}/>
                         </div> 
                     </div>
                 }
