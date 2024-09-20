@@ -2,6 +2,10 @@ import { GModal } from "../../Core/components/GModal";
 import { useState } from "react";
 import { GCard } from "../../Core/components/GCard";
 import { GForm } from "../../Core/components/GForm";
+import { validate_form } from "../../Core/scripts/form";
+import { errorAlert, successAlert } from "../../Core/scripts/alerts";
+import { GList } from "../../Core/components/GList";
+import { communication } from "../../Core/scripts/communication";
 
 export async function server_props(context){
     try{
@@ -36,34 +40,34 @@ export default function actualizar_cliente(){
     let schema_laboral = {
         title: 'Ingreso Laboral', 
         fields: [
-            {id: 'empresa', required: 'si', description: 'Nombre de la empresa donde labora', type:'text'},
-            {id: 'puesto', required: 'si', description: 'Puesto que ocupa en la empresa', type:'text'},
-            {id: 'direccion_empresa', required: 'si', description: 'Dirección de la empresa', type: 'text'},
-            {id: 'telefono_empresa', required: 'si',  description: 'Teléfono de la empresa', type: 'text',
+            {id: 'name', required: 'si', description: 'Nombre de la empresa donde labora', type:'text'},
+            {id: 'position', required: 'si', description: 'Puesto que ocupa en la empresa', type:'text'},
+            {id: 'address', required: 'si', description: 'Dirección de la empresa', type: 'text'},
+            {id: 'phone', required: 'si',  description: 'Teléfono de la empresa', type: 'text',
                 validations:{"regex_change": "[^0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
-            {id: 'ingreso_empresa', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
+            {id: 'amount', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
         ] 
     }
     let schema_negocio = {
         title: 'Ingreso Negocio', 
         fields: [
-            {id: 'negocio', required: 'si', description: 'Nombre del negocio', type:'text'},
-            {id: 'objeto', required: 'si', description: 'Objeto del negocio', type:'text'},
-            {id: 'direccion_negocio', required: 'si', description: 'Dirección del negocio', type: 'text'},
-            {id: 'telefono_negocio', required: 'si',  description: 'Teléfono del negocio', type: 'text', 
+            {id: 'name', required: 'si', description: 'Nombre del negocio', type:'text'},
+            {id: 'object', required: 'si', description: 'Objeto del negocio', type:'text'},
+            {id: 'address', required: 'si', description: 'Dirección del negocio', type: 'text'},
+            {id: 'phone', required: 'si',  description: 'Teléfono del negocio', type: 'text', 
                 validations:{"regex_change": "[^0-9]", "regex_blur":"^[0-9]{8}$", "fail_msg": 'Telefono no valido, solo sé permite numeros de 8 digitos'}
             },
-            {id: 'ingreso_negocio', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
+            {id: 'amount', required: 'si', description: 'Total de ingresos mensuales', type: 'money'}
         ] 
     }
     let schema_otros = {
-        title: 'Ingreso Negocio', 
+        title: 'Otros tipos de ingreso', 
         fields: [
-            {id: 'ingreso_remesas', required: 'no', description: 'Ingreso mensual por remesas familiares', type:'money'},
-            {id: 'ingreso_jubilacion', required: 'no', description: 'Ingreso mensual por jubilación o pensión', type:'money'},
-            {id: 'ingreso_servicios', required: 'no', description: 'Ingreso mensual por servicios profesionales', type: 'money'},
-            {id: 'ingreso_alquiler', required: 'no',  description: 'Ingreso mensual por alquiler o rentas', type: 'money'},
+            {id: 'remesa', required: 'no', description: 'Ingreso mensual por remesas familiares', type:'money'},
+            {id: 'jubilacion', required: 'no', description: 'Ingreso mensual por jubilación o pensión', type:'money'},
+            {id: 'servicios', required: 'no', description: 'Ingreso mensual por servicios profesionales', type: 'money'},
+            {id: 'renta', required: 'no',  description: 'Ingreso mensual por alquiler o rentas', type: 'money'},
             
         ] 
     }
@@ -82,13 +86,39 @@ export default function actualizar_cliente(){
         div_datos_financieros.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     let guardar_laboral = ()=>{
-        console.log("-----laboral", values_laboral);
+        try{
+            validate_form(values_laboral[0], schema_laboral.fields);
+            show_laboral[1](false);
+        }catch(err){
+            errorAlert(err);
+        }
     }
     let guardar_negocio = ()=>{
-
+        try{
+            validate_form(values_negocio[0], schema_negocio.fields);
+            show_negocio[1](false);
+        }catch(err){
+            errorAlert(err);
+        }
     }
     let guardar_otros = ()=>{
-
+        try{
+            validate_form(values_otros[0], schema_otros.fields);
+            show_otros[1](false);
+        }catch(err){
+            errorAlert(err);
+        }
+    }
+    let guardar_actualizacion = ()=>{
+        try{
+            if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
+            data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
+            communication({url:"/api/ActualizacionUPA/Services/create_folder_customer",data});
+            successAlert("Todo Ok");
+        }catch(err){
+            errorAlert(err);
+        }
+        
     }
     return (
         <>
@@ -102,7 +132,35 @@ export default function actualizar_cliente(){
                 <div className="income_button" onClick={()=>{show_negocio[1](true)}}><icon className="material-icons-outlined icon">store</icon><label>Negocio propio</label></div>
                 <div className="income_button" onClick={()=>{show_otros[1](true)}}><icon className="material-icons-outlined icon">paid</icon><label>Otros</label></div>
             </div>
-
+            <div id="ingresos_reportados">
+                {
+                    values_laboral[0] &&
+                    <div id="ingreso_laboral">
+                        <h2>Ingreso por Salario</h2>
+                        <div className="laboral_data">
+                            <GList data={values_laboral[0]} fields_display={['name','position', 'address', 'phone', 'amount']}/>
+                        </div> 
+                    </div>
+                }
+                {
+                    values_negocio[0] &&
+                    <div id="ingreso_negocio">
+                        <h2>Ingresos por negocios</h2>
+                        <div className="laboral_data">
+                            <GList data={values_laboral[0]} fields_display={['name','object', 'address', 'phone', 'amount']}/>
+                        </div> 
+                    </div>
+                }
+                {
+                    values_otros[0] &&
+                    <div id="ingreso_otro">
+                        <h2>Otros Ingresos</h2>
+                        <div className="laboral_data">
+                            <GList data={values_laboral[0]} fields_display={['remesa','jubilacion', 'renta', 'servicios']}/>
+                        </div> 
+                    </div>
+                }
+            </div>
             {
                 show_laboral[0] &&
                 <GModal show={show_laboral} title={`Ingreso asalariado`}>
@@ -122,7 +180,7 @@ export default function actualizar_cliente(){
                 </GModal>
             }
             <div>
-                <div className="button button_guardar_actualizacion">Guardar actualizacion</div>
+                <div className="button button_guardar_actualizacion" onClick={guardar_actualizacion}>Guardar actualizacion</div>
             </div>
         </GCard>
         </>
