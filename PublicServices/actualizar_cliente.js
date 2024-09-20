@@ -114,8 +114,8 @@ export default function actualizar_cliente(){
         try{
             if(!values_personal) throw `Se debe de llenar el formulario con los datos personales`
             if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
-            data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
-            communication({url:"/api/ActualizacionUPA/Services/create_folder_customer",data});
+            let data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
+            communication({url:"/api/ActualizacionUPA/Services/create_folder_customer", data});
             successAlert("Todo Ok");
         }catch(err){
             errorAlert(err);
@@ -154,7 +154,7 @@ export default function actualizar_cliente(){
                     <div id="ingreso_negocio">
                         <h2>Ingresos por negocios</h2>
                         <div className="laboral_data">
-                            <GList data={[values_laboral[0]]} fields_display={[
+                            <GList data={[values_negocio[0]]} fields_display={[
                                 {col:'name', show: "Nombre negocio"},
                                 {col: 'object', show: 'Objeto'}, 
                                 {col: 'address', show: 'Direccion'},
@@ -168,7 +168,7 @@ export default function actualizar_cliente(){
                     <div id="ingreso_otro">
                         <h2>Otros Ingresos</h2>
                         <div className="laboral_data">
-                            <GList data={[values_laboral[0]]} fields_display={[
+                            <GList data={[values_otros[0]]} fields_display={[
                                 {col: 'remesa', show: 'Remesas'},
                                 {col: 'jubilacion', show: 'Jubiliacion'},
                                 {col: 'renta', show: 'Rentas y alquileres'},
