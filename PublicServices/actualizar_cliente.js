@@ -110,12 +110,13 @@ export default function actualizar_cliente(){
             errorAlert(err);
         }
     }
-    let guardar_actualizacion = ()=>{
+    let guardar_actualizacion = async ()=>{
         try{
-            if(!values_personal) throw `Se debe de llenar el formulario con los datos personales`
+            validate_form(values_personal[0], schema_personal.fields);
+            if(!values_personal[0]) throw `Se debe de llenar el formulario con los datos personales`
             if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
             let data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
-            communication({url:"/api/ActualizacionUPA/Services/create_folder_customer", data});
+            await communication({url:"/api/ActualizacionUPA/Services/create_folder_customer", data});
             successAlert("Todo Ok");
         }catch(err){
             errorAlert(err);
