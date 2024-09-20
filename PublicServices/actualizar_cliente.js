@@ -82,7 +82,7 @@ export default function actualizar_cliente(){
         div_datos_financieros.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     let guardar_laboral = ()=>{
-
+        console.log("-----laboral", values_laboral);
     }
     let guardar_negocio = ()=>{
 
