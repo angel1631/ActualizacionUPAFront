@@ -180,19 +180,19 @@ export default function actualizar_cliente(){
             {
                 show_laboral[0] &&
                 <GModal show={show_laboral} title={`Ingreso asalariado`}>
-                    <GForm scheme={schema_laboral} values={values_laboral} cols={1} txt_send='Guardar' onSubmit={guardar_laboral}/>
+                    <GForm scheme={schema_laboral} values={values_laboral} values_base={values_laboral[0]} cols={1} txt_send='Guardar' onSubmit={guardar_laboral}/>
                 </GModal >
             }
             {
                 show_negocio[0] &&
                 <GModal show={show_negocio} title={`Ingreso por negocio`}>
-                    <GForm scheme={schema_negocio} values={values_negocio} cols={1} txt_send='Guardar' onSubmit={guardar_negocio}/>
+                    <GForm scheme={schema_negocio} values={values_negocio} values_base={values_negocio[0]} cols={1} txt_send='Guardar' onSubmit={guardar_negocio}/>
                 </GModal>
             }
             {
                 show_otros[0] &&
                 <GModal show={show_otros} title={`Otros ingresos`}>
-                    <GForm scheme={schema_otros} values={values_otros} cols={1} txt_send='Guardar' onSubmit={guardar_otros}/>
+                    <GForm scheme={schema_otros} values={values_otros} values_base={values_otros[0]} cols={1} txt_send='Guardar' onSubmit={guardar_otros}/>
                 </GModal>
             }
             <div>
