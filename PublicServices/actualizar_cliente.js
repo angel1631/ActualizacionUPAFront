@@ -136,7 +136,7 @@ export default function actualizar_cliente(){
             </div>
             <div id="ingresos_reportados">
                 {
-                    values_laboral[0] &&
+                    Object.keys(values_laboral[0]).length>0 &&
                     <div id="ingreso_laboral">
                         <h2>Ingreso por Salario</h2>
                         <div className="laboral_data">
@@ -145,7 +145,7 @@ export default function actualizar_cliente(){
                     </div>
                 }
                 {
-                    values_negocio[0] &&
+                    Object.keys(values_negocio[0]).length>0 &&
                     <div id="ingreso_negocio">
                         <h2>Ingresos por negocios</h2>
                         <div className="laboral_data">
@@ -154,7 +154,7 @@ export default function actualizar_cliente(){
                     </div>
                 }
                 {
-                    values_otros[0] &&
+                    Object.keys(values_otros[0]).length>0 &&
                     <div id="ingreso_otro">
                         <h2>Otros Ingresos</h2>
                         <div className="laboral_data">
