@@ -140,7 +140,12 @@ export default function actualizar_cliente(){
                     <div id="ingreso_laboral">
                         <h2>Ingreso por Salario</h2>
                         <div className="laboral_data">
-                            <GList data={[values_laboral[0]]} fields_display={['name','position', 'address', 'phone', 'amount']}/>
+                            <GList data={[values_laboral[0]]} fields_display={[
+                                {col: 'name', show: 'Nombre empresa'},
+                                {col: 'position', show: 'Puesto'},
+                                {col: 'address', show: 'Direccion'},
+                                {col: 'phone', show: 'Telefono'},
+                                {col: 'amount', show: 'Monto'}]}/>
                         </div> 
                     </div>
                 }
@@ -149,7 +154,12 @@ export default function actualizar_cliente(){
                     <div id="ingreso_negocio">
                         <h2>Ingresos por negocios</h2>
                         <div className="laboral_data">
-                            <GList data={[values_laboral[0]]} fields_display={['name','object', 'address', 'phone', 'amount']}/>
+                            <GList data={[values_laboral[0]]} fields_display={[
+                                {col:'name', show: "Nombre negocio"},
+                                {col: 'object', show: 'Objeto'}, 
+                                {col: 'address', show: 'Direccion'},
+                                {col: 'phone', show: 'Telefono'},
+                                {col: 'amount', show: 'Monto'}]}/>
                         </div> 
                     </div>
                 }
@@ -158,7 +168,11 @@ export default function actualizar_cliente(){
                     <div id="ingreso_otro">
                         <h2>Otros Ingresos</h2>
                         <div className="laboral_data">
-                            <GList data={[values_laboral[0]]} fields_display={['remesa','jubilacion', 'renta', 'servicios']}/>
+                            <GList data={[values_laboral[0]]} fields_display={[
+                                {col: 'remesa', show: 'Remesas'},
+                                {col: 'jubilacion', show: 'Jubiliacion'},
+                                {col: 'renta', show: 'Rentas y alquileres'},
+                                {col: 'servicios', show: "Servicios"}]}/>
                         </div> 
                     </div>
                 }
