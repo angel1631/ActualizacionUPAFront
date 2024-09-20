@@ -85,26 +85,25 @@ export default function actualizar_cliente(){
         div_datos_financieros.focus();
         div_datos_financieros.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    let guardar_laboral = ()=>{
+    let guardar_laboral = async ()=>{
         try{
-            console.log("++++++++laboral", values_laboral[0])
-            console.log(validate_form(values_laboral[0], schema_laboral.fields));
+            await validate_form(values_laboral[0], schema_laboral.fields);
             show_laboral[1](false);
         }catch(err){
             errorAlert(err);
         }
     }
-    let guardar_negocio = ()=>{
+    let guardar_negocio = async()=>{
         try{
-            validate_form(values_negocio[0], schema_negocio.fields);
+            await validate_form(values_negocio[0], schema_negocio.fields);
             show_negocio[1](false);
         }catch(err){
             errorAlert(err);
         }
     }
-    let guardar_otros = ()=>{
+    let guardar_otros = async()=>{
         try{
-            validate_form(values_otros[0], schema_otros.fields);
+            await validate_form(values_otros[0], schema_otros.fields);
             show_otros[1](false);
         }catch(err){
             errorAlert(err);
@@ -112,7 +111,7 @@ export default function actualizar_cliente(){
     }
     let guardar_actualizacion = async ()=>{
         try{
-            validate_form(values_personal[0], schema_personal.fields);
+            await validate_form(values_personal[0], schema_personal.fields);
             if(!values_personal[0]) throw `Se debe de llenar el formulario con los datos personales`
             if(!values_negocio[0] && !values_laboral[0] && !values_otros[0]) throw `Necesita agregar por lo menos una fuente de ingresos`;
             let data = {personal: values_personal[0], laboral: values_laboral[0], negocio: values_negocio[0], otros: values_otros[0]}    
