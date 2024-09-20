@@ -88,7 +88,7 @@ export default function actualizar_cliente(){
     let guardar_laboral = ()=>{
         try{
             console.log("++++++++laboral", values_laboral[0])
-            validate_form(values_laboral[0], schema_laboral.fields);
+            console.log(validate_form(values_laboral[0], schema_laboral.fields));
             show_laboral[1](false);
         }catch(err){
             errorAlert(err);
